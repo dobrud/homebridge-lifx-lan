@@ -162,7 +162,7 @@ class LifxLanPlatform {
                     service.addCharacteristic(Characteristic.Brightness);
                     service.addCharacteristic(Kelvin);
 
-                    if (/(LIFX [+Z]|Color|Original)/.test(accessory.context.model)) {
+                    if (/(LIFX [+Z]|A19|Color|Original)/.test(accessory.context.model)) {
                         service.addCharacteristic(Characteristic.Hue);
                         service.addCharacteristic(Characteristic.Saturation);
                     }
@@ -235,7 +235,7 @@ class LifxLanPlatform {
                 if (/(650|Original)/.test(context.accessory.context.model)) {
                     characteristics = [Characteristic.Brightness, Characteristic.Hue, Kelvin, Characteristic.Saturation];
                 }
-                else if (/LIFX [+Z]|Color/.test(context.accessory.context.model)) {
+                else if (/LIFX [+Z]|A19|Color/.test(context.accessory.context.model)) {
                     characteristics = [Characteristic.Brightness, Characteristic.Hue, Kelvin, Characteristic.Saturation];
                     services = [Service.LightSensor];
                 }
@@ -735,7 +735,7 @@ class LifxAccessory {
                 .setCharacteristic(Characteristic.Model, this.accessory.context.model)
                 .setCharacteristic(Characteristic.SerialNumber, this.bulb.id);
 
-            if (/(Color|Original)/.test(this.accessory.context.model)) {
+            if (/(Color|A19|Original)/.test(this.accessory.context.model)) {
                 let service = this.accessory.getService(Service.Lightbulb);
 
                 if (service.testCharacteristic(Characteristic.Hue) === false) {
